@@ -100,6 +100,15 @@ export function useAppData(seed) {
     [mutate]
   );
 
+  const setTargets = useCallback(
+    (targets) => {
+      mutate((next) => {
+        next.targets = { ...(next.targets || {}), ...targets };
+      });
+    },
+    [mutate]
+  );
+
   const addMeal = useCallback(
     (meal) => {
       mutate((next) => {
@@ -130,6 +139,7 @@ export function useAppData(seed) {
     setSessionNotes,
     setExercisePlan,
     setWhoopCheckIn,
+    setTargets,
     addMeal,
     removeMeal,
   };

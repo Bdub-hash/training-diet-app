@@ -3,7 +3,6 @@ import { toISODate } from '../utils/dates.js';
 import { estimateMealFromPhoto } from '../utils/aiVision.js';
 import { loadApiKey } from '../utils/storage.js';
 import ProgressRing from './ProgressRing.jsx';
-import AnimatedNumber from './AnimatedNumber.jsx';
 import ScanningLine from './ScanningLine.jsx';
 import Collapsible from './Collapsible.jsx';
 import SwipeToDelete from './SwipeToDelete.jsx';
@@ -17,12 +16,33 @@ const MEAL_TYPE_LABELS = {
 
 const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'snack'];
 
-function NutritionView({ config, mealsCatalog, meals, actions }) {
+function NutritionView({ config, mealsCatalog, meals, targets, actions }) {
   const [segment, setSegment] = useState('log');
   const todayISO = toISODate(new Date());
   const todayMeals = meals.filter((meal) => meal.date === todayISO);
   const totalCalories = todayMeals.reduce((sum, meal) => sum + Number(meal.calories || 0), 0);
   const totalProtein = todayMeals.reduce((sum, meal) => sum + Number(meal.protein_g || 0), 0);
+
+  const calorieTarget = (targets && targets.calories) || config.nutrition.calories;
+  const proteinTarget = (targets && targets.protein) || config.nutrition.protein_g_max;
+
+  const [editingTargets, setEditingTargets] = useState(false);
+  const [calorieTargetInput, setCalorieTargetInput] = useState(calorieTarget);
+  const [proteinTargetInput, setProteinTargetInput] = useState(proteinTarget);
+
+  function handleOpenEditTargets() {
+    setCalorieTargetInput(calorieTarget);
+    setProteinTargetInput(proteinTarget);
+    setEditingTargets(true);
+  }
+
+  function handleSaveTargets() {
+    actions.setTargets({
+      calories: Number(calorieTargetInput) || calorieTarget,
+      protein: Number(proteinTargetInput) || proteinTarget,
+    });
+    setEditingTargets(false);
+  }
 
   const [manualName, setManualName] = useState('');
   const [manualCalories, setManualCalories] = useState('');
@@ -259,11 +279,51 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
 
     segmentContent = [
       <section className="card ring-card" key="progress">
-        <h3 className="card-title">Today's Calories</h3>
-        <ProgressRing value={totalCalories} max={config.nutrition.calories} unit="kcal" />
-        <p className="nutrition-notes">
-          <AnimatedNumber value={totalProtein} />g protein logged today
-        </p>
+        <h3 className="card-title">Today's Intake</h3>
+        <div className="ring-row">
+          <div className="ring-block">
+            <ProgressRing value={totalCalories} max={calorieTarget} unit="kcal" size={132} />
+            <span className="ring-caption">Calories</span>
+          </div>
+          <div className="ring-block">
+            <ProgressRing value={totalProtein} max={proteinTarget} unit="g" size={132} />
+            <span className="ring-caption">Protein</span>
+          </div>
+        </div>
+        {editingTargets ? (
+          <div className="targets-form">
+            <label className="whoop-field">
+              <span className="set-label">Calorie target</span>
+              <input
+                className="text-input"
+                type="number"
+                value={calorieTargetInput}
+                onChange={(event) => setCalorieTargetInput(event.target.value)}
+              />
+            </label>
+            <label className="whoop-field">
+              <span className="set-label">Protein target (g)</span>
+              <input
+                className="text-input"
+                type="number"
+                value={proteinTargetInput}
+                onChange={(event) => setProteinTargetInput(event.target.value)}
+              />
+            </label>
+            <div className="button-row">
+              <button type="button" className="btn btn-outline" onClick={() => setEditingTargets(false)}>
+                Cancel
+              </button>
+              <button type="button" className="btn btn-primary" onClick={handleSaveTargets}>
+                Save
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button type="button" className="btn btn-text" onClick={handleOpenEditTargets}>
+            Edit targets
+          </button>
+        )}
       </section>,
 
       <section className="card" key="manual">

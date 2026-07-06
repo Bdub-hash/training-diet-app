@@ -5,7 +5,9 @@ export function loadData(seed) {
   try {
     const raw = window.localStorage.getItem(DATA_KEY);
     if (raw) {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      parsed.targets = parsed.targets || {};
+      return parsed;
     }
   } catch (err) {
     // corrupt storage — fall through and reseed
@@ -14,6 +16,7 @@ export function loadData(seed) {
     measurements: seed.measurements || [],
     sessions: seed.sessions || [],
     meals: seed.meals || [],
+    targets: seed.targets || {},
   };
   persistData(seeded);
   return seeded;

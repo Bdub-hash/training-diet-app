@@ -22,6 +22,7 @@ function App() {
     setSessionNotes,
     setExercisePlan,
     setWhoopCheckIn,
+    setTargets,
     addMeal,
     removeMeal,
   } = useAppData(logsSeed);
@@ -33,6 +34,7 @@ function App() {
     setSessionNotes,
     setExercisePlan,
     setWhoopCheckIn,
+    setTargets,
     addMeal,
     removeMeal,
   };
@@ -43,7 +45,13 @@ function App() {
   }
   if (activeTab === 'food') {
     activeView = (
-      <NutritionView config={config} mealsCatalog={mealsCatalog.meals} meals={data.meals} actions={actions} />
+      <NutritionView
+        config={config}
+        mealsCatalog={mealsCatalog.meals}
+        meals={data.meals}
+        targets={data.targets}
+        actions={actions}
+      />
     );
   }
   if (activeTab === 'tracker') {
