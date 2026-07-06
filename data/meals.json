@@ -1,0 +1,82 @@
+{
+  "meals": [
+    {
+      "name": "Greek yogurt, mixed berries, honey & granola",
+      "type": "breakfast",
+      "calories": 380,
+      "protein_g": 28
+    },
+    {
+      "name": "3-egg + egg white omelette, spinach, feta, sourdough",
+      "type": "breakfast",
+      "calories": 420,
+      "protein_g": 32
+    },
+    {
+      "name": "Protein oats with peanut butter & banana",
+      "type": "breakfast",
+      "calories": 450,
+      "protein_g": 30
+    },
+    {
+      "name": "Grilled chicken, jasmine rice, broccoli",
+      "type": "lunch",
+      "calories": 550,
+      "protein_g": 48
+    },
+    {
+      "name": "Tuna, chickpea & cherry tomato salad",
+      "type": "lunch",
+      "calories": 480,
+      "protein_g": 40
+    },
+    {
+      "name": "Turkey & avocado wholemeal wrap",
+      "type": "lunch",
+      "calories": 520,
+      "protein_g": 38
+    },
+    {
+      "name": "Lean steak, sweet potato mash, green beans",
+      "type": "dinner",
+      "calories": 620,
+      "protein_g": 50
+    },
+    {
+      "name": "Salmon fillet, quinoa, roasted asparagus",
+      "type": "dinner",
+      "calories": 600,
+      "protein_g": 45
+    },
+    {
+      "name": "Turkey mince chilli with rice",
+      "type": "dinner",
+      "calories": 580,
+      "protein_g": 48
+    },
+    {
+      "name": "Protein shake (whey + milk)",
+      "type": "snack",
+      "calories": 220,
+      "protein_g": 30
+    },
+    {
+      "name": "Cottage cheese & pineapple",
+      "type": "snack",
+      "calories": 200,
+      "protein_g": 22
+    },
+    {
+      "name": "Handful of almonds & an apple",
+      "type": "snack",
+      "calories": 260,
+      "protein_g": 8
+    },
+    {
+      "name": "Rice cakes with peanut butter",
+      "type": "snack",
+      "calories": 240,
+      "protein_g": 9
+    }
+  ]
+}

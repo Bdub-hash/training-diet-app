@@ -1,4 +1,5 @@
 import SessionTypeBadge from './SessionTypeBadge.jsx';
+import ExerciseList from './ExerciseList.jsx';
 import { toISODate, getMondayOfWeek, addDays, startOfDay } from '../utils/dates.js';
 
 const WEEKDAY_ORDER = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -16,7 +17,7 @@ function statusForDay(dayDate, todayStart, sessionLog) {
   return { label: 'Upcoming', className: 'status-pending' };
 }
 
-function WeekView({ config, logs }) {
+function WeekView({ config, data, actions }) {
   const today = new Date();
   const todayStart = startOfDay(today);
   const monday = getMondayOfWeek(today);
@@ -25,27 +26,68 @@ function WeekView({ config, logs }) {
     const schedule = config.week.find((entry) => entry.day === dayAbbr);
     const dayDate = addDays(monday, index);
     const dayISO = toISODate(dayDate);
-    const sessionLog = logs.sessions.find((entry) => entry.date === dayISO);
+    const sessionLog = data.sessions.find((entry) => entry.date === dayISO);
     const status = statusForDay(dayDate, todayStart, sessionLog);
+    const notes = sessionLog && sessionLog.notes ? sessionLog.notes : '';
+
+    let completeButtonLabel = 'Mark complete';
+    if (sessionLog && sessionLog.completed) {
+      completeButtonLabel = 'Completed ✓';
+    }
+    let completeButtonClass = 'btn btn-outline';
+    if (sessionLog && sessionLog.completed) {
+      completeButtonClass = 'btn btn-success';
+    }
+
+    let exerciseSection = null;
+    if (schedule.exercises && schedule.exercises.length > 0) {
+      exerciseSection = (
+        <ExerciseList
+          exercises={schedule.exercises}
+          session={sessionLog}
+          onLogSet={(exerciseName, setIndex, values) =>
+            actions.logSet(dayISO, dayAbbr, exerciseName, setIndex, values)
+          }
+        />
+      );
+    }
 
     return (
-      <li key={dayAbbr} className="week-row">
-        <div className="week-row-day">
-          <span className="week-day-abbr">{schedule.day}</span>
-          <span className="week-day-date">{dayDate.getDate()}</span>
+      <details className="week-day-details" key={dayAbbr}>
+        <summary className="week-row">
+          <div className="week-row-day">
+            <span className="week-day-abbr">{schedule.day}</span>
+            <span className="week-day-date">{dayDate.getDate()}</span>
+          </div>
+          <div className="week-row-body">
+            <span className="week-session-name">{schedule.session}</span>
+            <SessionTypeBadge type={schedule.type} />
+          </div>
+          <span className={`status-pill ${status.className}`}>{status.label}</span>
+        </summary>
+        <div className="week-day-panel">
+          {exerciseSection}
+          <button
+            type="button"
+            className={completeButtonClass}
+            onClick={() => actions.toggleSessionComplete(dayISO, dayAbbr)}
+          >
+            {completeButtonLabel}
+          </button>
+          <textarea
+            className="notes-input"
+            placeholder="Notes — what did you actually do?"
+            value={notes}
+            onChange={(event) => actions.setSessionNotes(dayISO, dayAbbr, event.target.value)}
+          />
         </div>
-        <div className="week-row-body">
-          <span className="week-session-name">{schedule.session}</span>
-          <SessionTypeBadge type={schedule.type} />
-        </div>
-        <span className={`status-pill ${status.className}`}>{status.label}</span>
-      </li>
+      </details>
     );
   });
 
   return (
     <div className="view">
-      <ul className="week-list">{rows}</ul>
+      <div className="week-list">{rows}</div>
 
       <section className="card rules-card">
         <h3 className="card-title">Rules</h3>

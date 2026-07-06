@@ -24,8 +24,8 @@ function formatDelta(current, previous) {
   return { text: `+${delta}`, className: 'delta-up' };
 }
 
-function MeasurementLog({ logs }) {
-  const sorted = [...logs.measurements].sort((a, b) => (a.date < b.date ? -1 : 1));
+function MeasurementLog({ data }) {
+  const sorted = [...data.measurements].sort((a, b) => (a.date < b.date ? -1 : 1));
 
   const rows = sorted.map((entry, index) => {
     const previous = index > 0 ? sorted[index - 1] : null;

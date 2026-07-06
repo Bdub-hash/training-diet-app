@@ -12,13 +12,67 @@
     "notes": "Deficit 400-500 kcal. Never exceed 700 kcal deficit on training days."
   },
   "week": [
-    { "day": "Mon", "session": "Upper Push + Core Finisher", "type": "strength" },
-    { "day": "Tue", "session": "Zone 2 — 55 min", "type": "cardio" },
-    { "day": "Wed", "session": "Rest + Sauna", "type": "recovery" },
-    { "day": "Thu", "session": "Lower Body #1 + Finisher", "type": "strength" },
-    { "day": "Fri", "session": "HIIT — 4-5 intervals", "type": "hiit" },
-    { "day": "Sat", "session": "Lower Body #2 + Finisher", "type": "strength" },
-    { "day": "Sun", "session": "Zone 2 — 55 min + Measurements", "type": "cardio", "measurement_day": true }
+    {
+      "day": "Mon",
+      "type": "strength",
+      "session": "Upper Push + Core Finisher",
+      "exercises": [
+        { "name": "Barbell Bench Press", "sets": 4, "reps": "6-8" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": "8-10" },
+        { "name": "Seated DB Shoulder Press", "sets": 3, "reps": "8-10" },
+        { "name": "Triceps Rope Pushdown", "sets": 3, "reps": "10-12" },
+        { "name": "Pallof Press (Finisher)", "sets": 3, "reps": "12/side" }
+      ]
+    },
+    {
+      "day": "Tue",
+      "type": "cardio",
+      "session": "Zone 2 — 55 min",
+      "exercises": []
+    },
+    {
+      "day": "Wed",
+      "type": "recovery",
+      "session": "Rest + Sauna",
+      "exercises": []
+    },
+    {
+      "day": "Thu",
+      "type": "strength",
+      "session": "Lower Body #1 + Finisher",
+      "exercises": [
+        { "name": "Barbell Back Squat", "sets": 4, "reps": "6-8" },
+        { "name": "Romanian Deadlift", "sets": 3, "reps": "8-10" },
+        { "name": "Leg Press", "sets": 3, "reps": "10-12" },
+        { "name": "Standing Calf Raise", "sets": 3, "reps": "12-15" },
+        { "name": "Hanging Knee Raise (Finisher)", "sets": 3, "reps": "12-15" }
+      ]
+    },
+    {
+      "day": "Fri",
+      "type": "hiit",
+      "session": "HIIT — 4-5 intervals",
+      "exercises": []
+    },
+    {
+      "day": "Sat",
+      "type": "strength",
+      "session": "Lower Body #2 + Finisher",
+      "exercises": [
+        { "name": "Trap Bar Deadlift", "sets": 4, "reps": "5-6" },
+        { "name": "Walking Lunge", "sets": 3, "reps": "10/leg" },
+        { "name": "Seated Leg Curl", "sets": 3, "reps": "10-12" },
+        { "name": "Seated Calf Raise", "sets": 3, "reps": "12-15" },
+        { "name": "Cable Woodchop (Finisher)", "sets": 3, "reps": "12/side" }
+      ]
+    },
+    {
+      "day": "Sun",
+      "type": "cardio",
+      "session": "Zone 2 — 55 min + Measurements",
+      "measurement_day": true,
+      "exercises": []
+    }
   ],
   "rules": [
     "Zone 2 x3/week is the priority — never compromised",

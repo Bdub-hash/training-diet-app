@@ -1,7 +1,9 @@
 const TABS = [
   { id: 'today', label: 'Today' },
   { id: 'week', label: 'Week' },
-  { id: 'log', label: 'Log' },
+  { id: 'food', label: 'Food' },
+  { id: 'tracker', label: 'Tracker' },
+  { id: 'stats', label: 'Stats' },
 ];
 
 function Nav({ activeTab, onSelectTab }) {
