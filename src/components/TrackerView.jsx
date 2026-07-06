@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { summarizeRecentWeeks } from '../utils/weekly.js';
 import { formatShortDate } from '../utils/dates.js';
+import AnimatedNumber from './AnimatedNumber.jsx';
 
 function TrackerView({ config, data }) {
   const [copyStatus, setCopyStatus] = useState('');
@@ -22,13 +23,18 @@ function TrackerView({ config, data }) {
       statusMark = <span className="day-bar-skip">–</span>;
     }
 
+    let valueDisplay = '—';
+    if (day.calories > 0) {
+      valueDisplay = <AnimatedNumber value={day.calories} />;
+    }
+
     return (
       <div className="day-bar-row" key={day.date}>
         <span className="day-bar-label">{formatShortDate(day.date)}</span>
         <div className="day-bar-track">
           <div className={barClass} style={{ width: `${widthPercent}%` }} />
         </div>
-        <span className="day-bar-value">{day.calories || '—'}</span>
+        <span className="day-bar-value">{valueDisplay}</span>
         {statusMark}
       </div>
     );

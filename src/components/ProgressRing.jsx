@@ -1,3 +1,5 @@
+import AnimatedNumber from './AnimatedNumber.jsx';
+
 function ProgressRing({ value, max, unit, size }) {
   const ringSize = size || 168;
   const strokeWidth = ringSize * 0.09;
@@ -38,7 +40,9 @@ function ProgressRing({ value, max, unit, size }) {
         <circle cx={center} cy={center} r={radius - strokeWidth / 2 - 2} fill="url(#ringGloss)" />
       </svg>
       <div className="progress-ring-center">
-        <span className="progress-ring-value">{value}</span>
+        <span className="progress-ring-value">
+          <AnimatedNumber value={value} />
+        </span>
         <span className="progress-ring-sublabel">
           / {max} {unit}
         </span>

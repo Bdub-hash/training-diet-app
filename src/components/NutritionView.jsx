@@ -3,6 +3,10 @@ import { toISODate } from '../utils/dates.js';
 import { estimateMealFromPhoto } from '../utils/aiVision.js';
 import { loadApiKey } from '../utils/storage.js';
 import ProgressRing from './ProgressRing.jsx';
+import AnimatedNumber from './AnimatedNumber.jsx';
+import ScanningLine from './ScanningLine.jsx';
+import Collapsible from './Collapsible.jsx';
+import SwipeToDelete from './SwipeToDelete.jsx';
 
 const MEAL_TYPE_LABELS = {
   breakfast: 'Breakfast',
@@ -151,35 +155,37 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
 
               return (
                 <li key={meal.name}>
-                  <details className="recipe-card">
-                    <summary className="suggestion-row">
+                  <Collapsible
+                    containerClassName="recipe-card"
+                    summaryClassName="suggestion-row"
+                    panelClassName="recipe-panel"
+                    summary={
                       <div className="suggestion-info">
                         <span className="suggestion-name">{meal.name}</span>
                         <span className="suggestion-macros">
                           {meal.calories} kcal · {meal.protein_g}g protein
                         </span>
                       </div>
-                    </summary>
-                    <div className="recipe-panel">
-                      <div className="recipe-macros">
-                        <span>Protein {meal.protein_g}g</span>
-                        <span>Carbs {meal.carbs_g}g</span>
-                        <span>Fat {meal.fat_g}g</span>
-                      </div>
-                      <p className="recipe-meta">
-                        {meal.prep_minutes} min · Serves {meal.servings}
-                      </p>
-                      {ingredientsBlock}
-                      {instructionsBlock}
-                      <button
-                        type="button"
-                        className="btn btn-small btn-primary"
-                        onClick={() => handleAddSuggestion(meal)}
-                      >
-                        Add to Today's Log
-                      </button>
+                    }
+                  >
+                    <div className="recipe-macros">
+                      <span>Protein {meal.protein_g}g</span>
+                      <span>Carbs {meal.carbs_g}g</span>
+                      <span>Fat {meal.fat_g}g</span>
                     </div>
-                  </details>
+                    <p className="recipe-meta">
+                      {meal.prep_minutes} min · Serves {meal.servings}
+                    </p>
+                    {ingredientsBlock}
+                    {instructionsBlock}
+                    <button
+                      type="button"
+                      className="btn btn-small btn-primary"
+                      onClick={() => handleAddSuggestion(meal)}
+                    >
+                      Add to Today's Log
+                    </button>
+                  </Collapsible>
                 </li>
               );
             })}
@@ -246,11 +252,18 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
       );
     }
 
+    let estimateLoadingBlock = null;
+    if (estimating) {
+      estimateLoadingBlock = <ScanningLine />;
+    }
+
     segmentContent = [
       <section className="card ring-card" key="progress">
         <h3 className="card-title">Today's Calories</h3>
         <ProgressRing value={totalCalories} max={config.nutrition.calories} unit="kcal" />
-        <p className="nutrition-notes">{totalProtein}g protein logged today</p>
+        <p className="nutrition-notes">
+          <AnimatedNumber value={totalProtein} />g protein logged today
+        </p>
       </section>,
 
       <section className="card" key="manual">
@@ -296,6 +309,7 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
         </label>
         {photoPreviewBlock}
         {estimateButtonBlock}
+        {estimateLoadingBlock}
         {estimateErrorBlock}
         {estimateResultBlock}
       </section>,
@@ -304,20 +318,17 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
         <h3 className="card-title">Logged Today</h3>
         <ul className="meal-log-list">
           {todayMeals.map((meal, index) => (
-            <li className="meal-log-row" key={`${meal.name}-${index}`}>
-              <div className="suggestion-info">
-                <span className="suggestion-name">{meal.name}</span>
-                <span className="suggestion-macros">
-                  {meal.calories} kcal · {meal.protein_g}g protein
-                </span>
-              </div>
-              <button
-                type="button"
-                className="btn btn-text"
-                onClick={() => actions.removeMeal(todayISO, index)}
-              >
-                Remove
-              </button>
+            <li key={`${meal.name}-${index}`}>
+              <SwipeToDelete onDelete={() => actions.removeMeal(todayISO, index)}>
+                <div className="meal-log-row">
+                  <div className="suggestion-info">
+                    <span className="suggestion-name">{meal.name}</span>
+                    <span className="suggestion-macros">
+                      {meal.calories} kcal · {meal.protein_g}g protein
+                    </span>
+                  </div>
+                </div>
+              </SwipeToDelete>
             </li>
           ))}
         </ul>

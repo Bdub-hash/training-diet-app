@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { evaluateRecovery, evaluateSleepCaution, buildAdjustedPlan } from '../utils/trainerRules.js';
 import { getTrainerGuidance } from '../utils/aiCoach.js';
 import { loadApiKey } from '../utils/storage.js';
+import ScanningLine from './ScanningLine.jsx';
 
 function WhoopCheckIn({ date, dayAbbr, schedule, session, rules, actions }) {
   const savedWhoop = session && session.whoop ? session.whoop : {};
@@ -175,6 +176,7 @@ function WhoopCheckIn({ date, dayAbbr, schedule, session, rules, actions }) {
       <button type="button" className="btn btn-text" onClick={handleAskTrainer} disabled={aiLoading}>
         {askTrainerButtonLabel}
       </button>
+      {aiLoading ? <ScanningLine /> : null}
       {aiErrorBlock}
       {aiResultBlock}
       {resetButton}

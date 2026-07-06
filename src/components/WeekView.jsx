@@ -1,5 +1,6 @@
 import SessionTypeBadge from './SessionTypeBadge.jsx';
 import ExerciseList from './ExerciseList.jsx';
+import Collapsible from './Collapsible.jsx';
 import { toISODate, getMondayOfWeek, addDays, startOfDay } from '../utils/dates.js';
 
 const WEEKDAY_ORDER = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -66,44 +67,49 @@ function WeekView({ config, data, actions }) {
     }
 
     return (
-      <details className="week-day-details" key={dayAbbr}>
-        <summary className="week-row">
-          <div className="week-row-day">
-            <span className="week-day-abbr">{schedule.day}</span>
-            <span className="week-day-date">{dayDate.getDate()}</span>
-          </div>
-          <div className="week-row-body">
-            <span className="week-session-name">{schedule.session}</span>
-            <SessionTypeBadge type={schedule.type} />
-          </div>
-          <span className={`status-pill ${status.className}`}>{status.label}</span>
-        </summary>
-        <div className="week-day-panel">
-          {exerciseSection}
-          <div className="button-row">
-            <button
-              type="button"
-              className={completeButtonClass}
-              onClick={() => actions.toggleSessionComplete(dayISO, dayAbbr)}
-            >
-              {completeButtonLabel}
-            </button>
-            <button
-              type="button"
-              className={skippedButtonClass}
-              onClick={() => actions.toggleSessionSkipped(dayISO, dayAbbr)}
-            >
-              {skippedButtonLabel}
-            </button>
-          </div>
-          <textarea
-            className="notes-input"
-            placeholder="Notes — what did you actually do?"
-            value={notes}
-            onChange={(event) => actions.setSessionNotes(dayISO, dayAbbr, event.target.value)}
-          />
+      <Collapsible
+        key={dayAbbr}
+        containerClassName="week-day-details"
+        summaryClassName="week-row"
+        panelClassName="week-day-panel"
+        summary={
+          <>
+            <div className="week-row-day">
+              <span className="week-day-abbr">{schedule.day}</span>
+              <span className="week-day-date">{dayDate.getDate()}</span>
+            </div>
+            <div className="week-row-body">
+              <span className="week-session-name">{schedule.session}</span>
+              <SessionTypeBadge type={schedule.type} />
+            </div>
+            <span className={`status-pill ${status.className}`}>{status.label}</span>
+          </>
+        }
+      >
+        {exerciseSection}
+        <div className="button-row">
+          <button
+            type="button"
+            className={completeButtonClass}
+            onClick={() => actions.toggleSessionComplete(dayISO, dayAbbr)}
+          >
+            {completeButtonLabel}
+          </button>
+          <button
+            type="button"
+            className={skippedButtonClass}
+            onClick={() => actions.toggleSessionSkipped(dayISO, dayAbbr)}
+          >
+            {skippedButtonLabel}
+          </button>
         </div>
-      </details>
+        <textarea
+          className="notes-input"
+          placeholder="Notes — what did you actually do?"
+          value={notes}
+          onChange={(event) => actions.setSessionNotes(dayISO, dayAbbr, event.target.value)}
+        />
+      </Collapsible>
     );
   });
 

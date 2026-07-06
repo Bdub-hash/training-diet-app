@@ -134,6 +134,22 @@ textarea {
   cursor: pointer;
   width: 100%;
   margin-top: 4px;
+  transition: transform 0.1s ease;
+}
+
+.btn:active,
+.stepper-button:active,
+.remove-button:active,
+.nav-tab:active,
+.segment:active {
+  transform: scale(0.96);
+}
+
+.stepper-button,
+.remove-button,
+.nav-tab,
+.segment {
+  transition: transform 0.1s ease;
 }
 
 .btn-primary {
@@ -474,13 +490,14 @@ textarea {
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
   padding: 14px;
   cursor: pointer;
-  list-style: none;
-}
-
-.week-row::-webkit-details-marker {
-  display: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
 }
 
 .week-row::after {
@@ -491,7 +508,7 @@ textarea {
   transition: transform 0.15s ease;
 }
 
-.week-day-details[open] .week-row::after {
+.week-row[aria-expanded='true']::after {
   transform: rotate(90deg);
 }
 
@@ -739,12 +756,12 @@ textarea {
 .recipe-card .suggestion-row {
   background: transparent;
   border-radius: 0;
+  border: none;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
   cursor: pointer;
-  list-style: none;
-}
-
-.recipe-card .suggestion-row::-webkit-details-marker {
-  display: none;
 }
 
 .recipe-card .suggestion-row::after {
@@ -756,8 +773,24 @@ textarea {
   transition: transform 0.15s ease;
 }
 
-.recipe-card[open] .suggestion-row::after {
+.recipe-card .suggestion-row[aria-expanded='true']::after {
   transform: rotate(90deg);
+}
+
+/* Collapsible (animated expand/collapse) */
+.collapsible-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.collapsible-panel-open {
+  grid-template-rows: 1fr;
+}
+
+.collapsible-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .recipe-panel {
@@ -843,6 +876,67 @@ textarea {
   font-size: 13px;
   color: var(--success);
   margin: 8px 0 0;
+}
+
+/* Swipe to delete */
+.swipe-row {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.swipe-delete-action {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 22px;
+  background: var(--danger);
+  color: #05070d;
+  border: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.swipe-content {
+  position: relative;
+  transition: transform 0.2s ease;
+  touch-action: pan-y;
+}
+
+/* Scanning-line loader */
+.scan-loader {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-alt);
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.scan-loader-beam {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+  animation: scanSweep 1.2s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* Progress ring */
