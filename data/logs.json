@@ -1,0 +1,8 @@
+{
+  "measurements": [
+    { "date": "2026-07-05", "waist_cm": null, "left_thigh_cm": null, "right_thigh_cm": null }
+  ],
+  "sessions": [
+    { "date": "2026-07-06", "completed": true, "notes": "Actual exercises done" }
+  ]
+}

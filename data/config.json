@@ -1,0 +1,29 @@
+{
+  "block": {
+    "name": "Block 1",
+    "start": "2026-06-22",
+    "end": "2026-07-19"
+  },
+  "nutrition": {
+    "calories": 2350,
+    "tdee": 2850,
+    "protein_g_min": 170,
+    "protein_g_max": 190,
+    "notes": "Deficit 400-500 kcal. Never exceed 700 kcal deficit on training days."
+  },
+  "week": [
+    { "day": "Mon", "session": "Upper Push + Core Finisher", "type": "strength" },
+    { "day": "Tue", "session": "Zone 2 — 55 min", "type": "cardio" },
+    { "day": "Wed", "session": "Rest + Sauna", "type": "recovery" },
+    { "day": "Thu", "session": "Lower Body #1 + Finisher", "type": "strength" },
+    { "day": "Fri", "session": "HIIT — 4-5 intervals", "type": "hiit" },
+    { "day": "Sat", "session": "Lower Body #2 + Finisher", "type": "strength" },
+    { "day": "Sun", "session": "Zone 2 — 55 min + Measurements", "type": "cardio", "measurement_day": true }
+  ],
+  "rules": [
+    "Zone 2 x3/week is the priority — never compromised",
+    "HIIT capped at 1x/week",
+    "WHOOP yellow (34-66%): reduce volume ~20%, keep intensity, skip finishers",
+    "WHOOP red (0-33%): rest or easy walk only"
+  ]
+}
