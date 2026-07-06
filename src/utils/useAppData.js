@@ -49,6 +49,42 @@ export function useAppData(seed) {
       mutate((next) => {
         const session = findOrCreateSession(next, date, dayAbbr);
         session.completed = !session.completed;
+        if (session.completed) {
+          session.skipped = false;
+        }
+      });
+    },
+    [mutate]
+  );
+
+  const toggleSessionSkipped = useCallback(
+    (date, dayAbbr) => {
+      mutate((next) => {
+        const session = findOrCreateSession(next, date, dayAbbr);
+        session.skipped = !session.skipped;
+        if (session.skipped) {
+          session.completed = false;
+        }
+      });
+    },
+    [mutate]
+  );
+
+  const setExercisePlan = useCallback(
+    (date, dayAbbr, plan) => {
+      mutate((next) => {
+        const session = findOrCreateSession(next, date, dayAbbr);
+        session.plan = plan;
+      });
+    },
+    [mutate]
+  );
+
+  const setWhoopCheckIn = useCallback(
+    (date, dayAbbr, whoop) => {
+      mutate((next) => {
+        const session = findOrCreateSession(next, date, dayAbbr);
+        session.whoop = whoop;
       });
     },
     [mutate]
@@ -86,5 +122,15 @@ export function useAppData(seed) {
     [mutate]
   );
 
-  return { data, logSet, toggleSessionComplete, setSessionNotes, addMeal, removeMeal };
+  return {
+    data,
+    logSet,
+    toggleSessionComplete,
+    toggleSessionSkipped,
+    setSessionNotes,
+    setExercisePlan,
+    setWhoopCheckIn,
+    addMeal,
+    removeMeal,
+  };
 }

@@ -17,9 +17,11 @@ export function summarizeWeek(weekStartISO, sessions, meals) {
       date: dayISO,
       calories,
       completed: Boolean(session && session.completed),
+      skipped: Boolean(session && session.skipped),
     });
   }
   const sessionsCompleted = days.filter((day) => day.completed).length;
+  const sessionsSkipped = days.filter((day) => day.skipped).length;
   const loggedDays = days.filter((day) => day.calories > 0);
   const avgCalories =
     loggedDays.length > 0
@@ -30,6 +32,7 @@ export function summarizeWeek(weekStartISO, sessions, meals) {
     weekStart: weekStartISO,
     days,
     sessionsCompleted,
+    sessionsSkipped,
     avgCalories,
   };
 }

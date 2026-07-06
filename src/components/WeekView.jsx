@@ -8,6 +8,9 @@ function statusForDay(dayDate, todayStart, sessionLog) {
   if (sessionLog && sessionLog.completed) {
     return { label: 'Done', className: 'status-done' };
   }
+  if (sessionLog && sessionLog.skipped) {
+    return { label: 'Skipped', className: 'status-skipped' };
+  }
   if (toISODate(dayDate) === toISODate(todayStart)) {
     return { label: 'Today', className: 'status-today' };
   }
@@ -29,6 +32,7 @@ function WeekView({ config, data, actions }) {
     const sessionLog = data.sessions.find((entry) => entry.date === dayISO);
     const status = statusForDay(dayDate, todayStart, sessionLog);
     const notes = sessionLog && sessionLog.notes ? sessionLog.notes : '';
+    const effectiveExercises = sessionLog && sessionLog.plan ? sessionLog.plan : schedule.exercises;
 
     let completeButtonLabel = 'Mark complete';
     if (sessionLog && sessionLog.completed) {
@@ -39,11 +43,20 @@ function WeekView({ config, data, actions }) {
       completeButtonClass = 'btn btn-success';
     }
 
+    let skippedButtonLabel = 'Skipped';
+    if (sessionLog && sessionLog.skipped) {
+      skippedButtonLabel = 'Skipped ✓';
+    }
+    let skippedButtonClass = 'btn btn-outline';
+    if (sessionLog && sessionLog.skipped) {
+      skippedButtonClass = 'btn btn-warning';
+    }
+
     let exerciseSection = null;
-    if (schedule.exercises && schedule.exercises.length > 0) {
+    if (effectiveExercises && effectiveExercises.length > 0) {
       exerciseSection = (
         <ExerciseList
-          exercises={schedule.exercises}
+          exercises={effectiveExercises}
           session={sessionLog}
           onLogSet={(exerciseName, setIndex, values) =>
             actions.logSet(dayISO, dayAbbr, exerciseName, setIndex, values)
@@ -67,13 +80,22 @@ function WeekView({ config, data, actions }) {
         </summary>
         <div className="week-day-panel">
           {exerciseSection}
-          <button
-            type="button"
-            className={completeButtonClass}
-            onClick={() => actions.toggleSessionComplete(dayISO, dayAbbr)}
-          >
-            {completeButtonLabel}
-          </button>
+          <div className="button-row">
+            <button
+              type="button"
+              className={completeButtonClass}
+              onClick={() => actions.toggleSessionComplete(dayISO, dayAbbr)}
+            >
+              {completeButtonLabel}
+            </button>
+            <button
+              type="button"
+              className={skippedButtonClass}
+              onClick={() => actions.toggleSessionSkipped(dayISO, dayAbbr)}
+            >
+              {skippedButtonLabel}
+            </button>
+          </div>
           <textarea
             className="notes-input"
             placeholder="Notes — what did you actually do?"

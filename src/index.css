@@ -160,6 +160,21 @@ textarea {
   margin-top: 0;
 }
 
+.btn-warning {
+  background: var(--warning-light);
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+}
+
+.button-row .btn {
+  margin-top: 0;
+}
+
 /* Block progress */
 .block-progress-header {
   display: flex;
@@ -282,6 +297,11 @@ textarea {
 .status-missed {
   background: var(--danger-light);
   color: var(--danger);
+}
+
+.status-skipped {
+  background: var(--warning-light);
+  color: var(--warning);
 }
 
 /* Nutrition */
@@ -838,4 +858,143 @@ textarea {
 .nav-tab-active {
   background: var(--blue-light);
   color: var(--blue);
+}
+
+/* WHOOP check-in */
+.whoop-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.whoop-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.whoop-field .text-input {
+  margin-bottom: 0;
+}
+
+.verdict-card {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.verdict-green {
+  background: var(--success-light);
+}
+
+.verdict-yellow {
+  background: var(--warning-light);
+}
+
+.verdict-red {
+  background: var(--danger-light);
+}
+
+.verdict-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.verdict-green .verdict-label {
+  color: var(--success);
+}
+
+.verdict-yellow .verdict-label {
+  color: var(--warning);
+}
+
+.verdict-red .verdict-label {
+  color: var(--danger);
+}
+
+.verdict-summary {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.verdict-caution {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.ai-result {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.ai-exercise-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-exercise-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.ai-exercise-action {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-light);
+  border-radius: 999px;
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+
+/* Exercise plan editing */
+.exercise-edit-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.stepper-button,
+.remove-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.remove-button {
+  margin-left: auto;
+  color: var(--danger);
+}
+
+.add-exercise-form {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.day-bar-skip {
+  color: var(--warning);
+  font-weight: 700;
+  text-align: center;
 }

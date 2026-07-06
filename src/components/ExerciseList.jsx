@@ -1,4 +1,4 @@
-function ExerciseList({ exercises, session, onLogSet }) {
+function ExerciseList({ exercises, session, onLogSet, editable, onAdjustSets, onRemoveExercise }) {
   if (!exercises || exercises.length === 0) {
     return null;
   }
@@ -37,6 +37,38 @@ function ExerciseList({ exercises, session, onLogSet }) {
       );
     }
 
+    let editControls = null;
+    if (editable) {
+      editControls = (
+        <div className="exercise-edit-controls">
+          <button
+            type="button"
+            className="stepper-button"
+            onClick={() => onAdjustSets(exercise.name, -1)}
+            aria-label={`Reduce sets for ${exercise.name}`}
+          >
+            −
+          </button>
+          <button
+            type="button"
+            className="stepper-button"
+            onClick={() => onAdjustSets(exercise.name, 1)}
+            aria-label={`Add a set for ${exercise.name}`}
+          >
+            +
+          </button>
+          <button
+            type="button"
+            className="remove-button"
+            onClick={() => onRemoveExercise(exercise.name)}
+            aria-label={`Remove ${exercise.name}`}
+          >
+            ×
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className="exercise-block" key={exercise.name}>
         <div className="exercise-header">
@@ -45,6 +77,7 @@ function ExerciseList({ exercises, session, onLogSet }) {
             {exercise.sets} × {exercise.reps}
           </span>
         </div>
+        {editControls}
         <div className="set-row set-row-header">
           <span className="set-number" />
           <span className="set-label">Reps</span>

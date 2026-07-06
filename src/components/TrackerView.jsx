@@ -15,9 +15,11 @@ function TrackerView({ config, data }) {
       barClass = 'day-bar-fill day-bar-over';
     }
 
-    let checkMark = null;
+    let statusMark = null;
     if (day.completed) {
-      checkMark = <span className="day-bar-check">✓</span>;
+      statusMark = <span className="day-bar-check">✓</span>;
+    } else if (day.skipped) {
+      statusMark = <span className="day-bar-skip">–</span>;
     }
 
     return (
@@ -27,7 +29,7 @@ function TrackerView({ config, data }) {
           <div className={barClass} style={{ width: `${widthPercent}%` }} />
         </div>
         <span className="day-bar-value">{day.calories || '—'}</span>
-        {checkMark}
+        {statusMark}
       </div>
     );
   });
@@ -36,7 +38,9 @@ function TrackerView({ config, data }) {
     <li className="history-row" key={week.weekStart}>
       <span>{formatShortDate(week.weekStart)}</span>
       <span>{week.avgCalories || '—'} kcal avg</span>
-      <span>{week.sessionsCompleted}/7 sessions</span>
+      <span>
+        {week.sessionsCompleted}/7 done · {week.sessionsSkipped} skipped
+      </span>
     </li>
   ));
 
@@ -58,7 +62,9 @@ function TrackerView({ config, data }) {
       <section className="card">
         <h3 className="card-title">This Week</h3>
         <div className="day-bar-list">{dayBars}</div>
-        <p className="nutrition-notes">{currentWeek.sessionsCompleted} of 7 sessions completed</p>
+        <p className="nutrition-notes">
+          {currentWeek.sessionsCompleted} of 7 sessions completed · {currentWeek.sessionsSkipped} skipped
+        </p>
       </section>
 
       <section className="card">

@@ -1,16 +1,25 @@
+import { useState } from 'react';
 import BlockProgress from './BlockProgress.jsx';
 import SessionTypeBadge from './SessionTypeBadge.jsx';
 import ExerciseList from './ExerciseList.jsx';
+import WhoopCheckIn from './WhoopCheckIn.jsx';
 import { toISODate, getDayAbbr } from '../utils/dates.js';
+import { adjustSets, removeExercise, addExercise } from '../utils/planEditing.js';
 
 function TodayView({ config, data, actions }) {
+  const [newExerciseName, setNewExerciseName] = useState('');
+  const [newExerciseSets, setNewExerciseSets] = useState('3');
+  const [newExerciseReps, setNewExerciseReps] = useState('');
+
   const today = new Date();
   const todayISO = toISODate(today);
   const todayAbbr = getDayAbbr(today);
   const schedule = config.week.find((entry) => entry.day === todayAbbr);
   const session = data.sessions.find((entry) => entry.date === todayISO);
   const completed = Boolean(session && session.completed);
+  const skipped = Boolean(session && session.skipped);
   const notes = session && session.notes ? session.notes : '';
+  const effectiveExercises = session && session.plan ? session.plan : schedule.exercises;
 
   let measurementReminder = null;
   if (schedule.measurement_day) {
@@ -30,18 +39,78 @@ function TodayView({ config, data, actions }) {
     completeButtonClass = 'btn btn-success';
   }
 
+  let skippedButtonLabel = 'Skipped';
+  if (skipped) {
+    skippedButtonLabel = 'Skipped ✓';
+  }
+  let skippedButtonClass = 'btn btn-outline';
+  if (skipped) {
+    skippedButtonClass = 'btn btn-warning';
+  }
+
+  function handleAdjustSets(exerciseName, delta) {
+    actions.setExercisePlan(todayISO, todayAbbr, adjustSets(effectiveExercises, exerciseName, delta));
+  }
+
+  function handleRemoveExercise(exerciseName) {
+    actions.setExercisePlan(todayISO, todayAbbr, removeExercise(effectiveExercises, exerciseName));
+  }
+
+  function handleAddExercise() {
+    if (!newExerciseName.trim()) {
+      return;
+    }
+    actions.setExercisePlan(
+      todayISO,
+      todayAbbr,
+      addExercise(effectiveExercises, newExerciseName.trim(), newExerciseSets, newExerciseReps.trim())
+    );
+    setNewExerciseName('');
+    setNewExerciseSets('3');
+    setNewExerciseReps('');
+  }
+
   let exerciseSection = null;
-  if (schedule.exercises && schedule.exercises.length > 0) {
+  if (effectiveExercises && effectiveExercises.length > 0) {
     exerciseSection = (
       <section className="card">
         <h3 className="card-title">Exercises</h3>
         <ExerciseList
-          exercises={schedule.exercises}
+          exercises={effectiveExercises}
           session={session}
+          editable
           onLogSet={(exerciseName, setIndex, values) =>
             actions.logSet(todayISO, todayAbbr, exerciseName, setIndex, values)
           }
+          onAdjustSets={handleAdjustSets}
+          onRemoveExercise={handleRemoveExercise}
         />
+        <div className="add-exercise-form">
+          <input
+            className="text-input"
+            placeholder="Add exercise"
+            value={newExerciseName}
+            onChange={(event) => setNewExerciseName(event.target.value)}
+          />
+          <div className="estimate-fields">
+            <input
+              className="text-input"
+              type="number"
+              placeholder="Sets"
+              value={newExerciseSets}
+              onChange={(event) => setNewExerciseSets(event.target.value)}
+            />
+            <input
+              className="text-input"
+              placeholder="Reps (e.g. 8-10)"
+              value={newExerciseReps}
+              onChange={(event) => setNewExerciseReps(event.target.value)}
+            />
+          </div>
+          <button type="button" className="btn btn-outline" onClick={handleAddExercise}>
+            Add Exercise
+          </button>
+        </div>
       </section>
     );
   }
@@ -56,13 +125,22 @@ function TodayView({ config, data, actions }) {
           <SessionTypeBadge type={schedule.type} />
         </div>
         <h2 className="session-name">{schedule.session}</h2>
-        <button
-          type="button"
-          className={completeButtonClass}
-          onClick={() => actions.toggleSessionComplete(todayISO, todayAbbr)}
-        >
-          {completeButtonLabel}
-        </button>
+        <div className="button-row">
+          <button
+            type="button"
+            className={completeButtonClass}
+            onClick={() => actions.toggleSessionComplete(todayISO, todayAbbr)}
+          >
+            {completeButtonLabel}
+          </button>
+          <button
+            type="button"
+            className={skippedButtonClass}
+            onClick={() => actions.toggleSessionSkipped(todayISO, todayAbbr)}
+          >
+            {skippedButtonLabel}
+          </button>
+        </div>
         <textarea
           className="notes-input"
           placeholder="Notes — what did you actually do?"
@@ -70,6 +148,15 @@ function TodayView({ config, data, actions }) {
           onChange={(event) => actions.setSessionNotes(todayISO, todayAbbr, event.target.value)}
         />
       </section>
+
+      <WhoopCheckIn
+        date={todayISO}
+        dayAbbr={todayAbbr}
+        schedule={schedule}
+        session={session}
+        rules={config.rules}
+        actions={actions}
+      />
 
       {exerciseSection}
 

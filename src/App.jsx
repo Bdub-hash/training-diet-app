@@ -14,10 +14,28 @@ import mealsCatalog from '../data/meals.json';
 function App() {
   const [activeTab, setActiveTab] = useState('today');
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const { data, logSet, toggleSessionComplete, setSessionNotes, addMeal, removeMeal } =
-    useAppData(logsSeed);
+  const {
+    data,
+    logSet,
+    toggleSessionComplete,
+    toggleSessionSkipped,
+    setSessionNotes,
+    setExercisePlan,
+    setWhoopCheckIn,
+    addMeal,
+    removeMeal,
+  } = useAppData(logsSeed);
 
-  const actions = { logSet, toggleSessionComplete, setSessionNotes, addMeal, removeMeal };
+  const actions = {
+    logSet,
+    toggleSessionComplete,
+    toggleSessionSkipped,
+    setSessionNotes,
+    setExercisePlan,
+    setWhoopCheckIn,
+    addMeal,
+    removeMeal,
+  };
 
   let activeView = <TodayView config={config} data={data} actions={actions} />;
   if (activeTab === 'week') {
