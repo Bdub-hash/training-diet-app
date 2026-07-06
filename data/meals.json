@@ -4,79 +4,389 @@
       "name": "Greek yogurt, mixed berries, honey & granola",
       "type": "breakfast",
       "calories": 380,
-      "protein_g": 28
+      "protein_g": 28,
+      "carbs_g": 42,
+      "fat_g": 11,
+      "prep_minutes": 3,
+      "servings": 1,
+      "ingredients": [
+        "250g Greek yogurt (0%)",
+        "80g mixed berries",
+        "30g granola",
+        "1 tsp honey"
+      ],
+      "instructions": [
+        "Spoon the yogurt into a bowl.",
+        "Top with mixed berries and granola.",
+        "Drizzle with honey and serve."
+      ]
     },
     {
       "name": "3-egg + egg white omelette, spinach, feta, sourdough",
       "type": "breakfast",
       "calories": 420,
-      "protein_g": 32
+      "protein_g": 32,
+      "carbs_g": 30,
+      "fat_g": 19,
+      "prep_minutes": 8,
+      "servings": 1,
+      "ingredients": [
+        "3 whole eggs + 2 egg whites",
+        "30g feta, crumbled",
+        "a large handful of spinach",
+        "1 slice sourdough",
+        "1 tsp olive oil"
+      ],
+      "instructions": [
+        "Whisk the eggs and egg whites together.",
+        "Wilt the spinach in a non-stick pan with the olive oil.",
+        "Pour in the eggs, scatter feta over the top, and cook until just set.",
+        "Fold and serve with toasted sourdough."
+      ]
     },
     {
       "name": "Protein oats with peanut butter & banana",
       "type": "breakfast",
       "calories": 450,
-      "protein_g": 30
+      "protein_g": 30,
+      "carbs_g": 50,
+      "fat_g": 14,
+      "prep_minutes": 7,
+      "servings": 1,
+      "ingredients": [
+        "60g rolled oats",
+        "1 scoop whey protein",
+        "1 tbsp peanut butter",
+        "1 banana, sliced",
+        "200ml milk"
+      ],
+      "instructions": [
+        "Cook the oats with milk until creamy.",
+        "Stir through the protein powder off the heat.",
+        "Top with sliced banana and peanut butter."
+      ]
+    },
+    {
+      "name": "Smoked salmon, scrambled eggs, rye toast",
+      "type": "breakfast",
+      "calories": 400,
+      "protein_g": 34,
+      "carbs_g": 22,
+      "fat_g": 20,
+      "prep_minutes": 8,
+      "servings": 1,
+      "ingredients": [
+        "100g smoked salmon",
+        "3 eggs",
+        "1 slice rye bread",
+        "a squeeze of lemon",
+        "black pepper"
+      ],
+      "instructions": [
+        "Scramble the eggs gently over low heat.",
+        "Toast the rye bread.",
+        "Serve the eggs with smoked salmon on top, a squeeze of lemon, and black pepper."
+      ]
+    },
+    {
+      "name": "Cottage cheese pancakes with blueberries",
+      "type": "breakfast",
+      "calories": 380,
+      "protein_g": 30,
+      "carbs_g": 40,
+      "fat_g": 11,
+      "prep_minutes": 12,
+      "servings": 1,
+      "ingredients": [
+        "200g cottage cheese",
+        "2 eggs",
+        "30g oats, blitzed to flour",
+        "80g blueberries",
+        "1 tsp honey"
+      ],
+      "instructions": [
+        "Blend the cottage cheese, eggs, and oat flour until smooth.",
+        "Cook small pancakes in a non-stick pan, about 2 minutes per side.",
+        "Top with blueberries and a drizzle of honey."
+      ]
     },
     {
       "name": "Grilled chicken, jasmine rice, broccoli",
       "type": "lunch",
       "calories": 550,
-      "protein_g": 48
+      "protein_g": 48,
+      "carbs_g": 55,
+      "fat_g": 15,
+      "prep_minutes": 20,
+      "servings": 1,
+      "ingredients": [
+        "180g chicken breast",
+        "150g cooked jasmine rice",
+        "150g broccoli",
+        "1 tsp olive oil",
+        "seasoning of choice"
+      ],
+      "instructions": [
+        "Season and grill the chicken breast until cooked through.",
+        "Steam the broccoli.",
+        "Serve over rice with a drizzle of olive oil."
+      ]
     },
     {
       "name": "Tuna, chickpea & cherry tomato salad",
       "type": "lunch",
       "calories": 480,
-      "protein_g": 40
+      "protein_g": 40,
+      "carbs_g": 40,
+      "fat_g": 18,
+      "prep_minutes": 10,
+      "servings": 1,
+      "ingredients": [
+        "160g tuna in spring water, drained",
+        "150g chickpeas, drained",
+        "100g cherry tomatoes, halved",
+        "1/2 red onion, sliced",
+        "1 tbsp olive oil",
+        "lemon juice"
+      ],
+      "instructions": [
+        "Combine the tuna, chickpeas, tomatoes, and red onion in a bowl.",
+        "Dress with olive oil and lemon juice.",
+        "Toss and serve."
+      ]
     },
     {
       "name": "Turkey & avocado wholemeal wrap",
       "type": "lunch",
       "calories": 520,
-      "protein_g": 38
+      "protein_g": 38,
+      "carbs_g": 45,
+      "fat_g": 21,
+      "prep_minutes": 6,
+      "servings": 1,
+      "ingredients": [
+        "1 large wholemeal wrap",
+        "120g sliced turkey breast",
+        "1/2 avocado, sliced",
+        "mixed salad leaves",
+        "1 tbsp light mayo or hummus"
+      ],
+      "instructions": [
+        "Spread the wrap with mayo or hummus.",
+        "Layer turkey, avocado, and salad leaves.",
+        "Roll tightly and slice in half."
+      ]
+    },
+    {
+      "name": "Prawn & quinoa Buddha bowl",
+      "type": "lunch",
+      "calories": 500,
+      "protein_g": 45,
+      "carbs_g": 45,
+      "fat_g": 16,
+      "prep_minutes": 15,
+      "servings": 1,
+      "ingredients": [
+        "200g king prawns",
+        "150g cooked quinoa",
+        "80g edamame beans",
+        "1/2 avocado, sliced",
+        "1 carrot, grated",
+        "soy-sesame dressing"
+      ],
+      "instructions": [
+        "Pan-fry the prawns for 2-3 minutes each side until pink.",
+        "Arrange the quinoa, edamame, avocado, and carrot in a bowl.",
+        "Top with prawns and drizzle with soy-sesame dressing."
+      ]
+    },
+    {
+      "name": "Beef & vegetable stir-fry with noodles",
+      "type": "lunch",
+      "calories": 560,
+      "protein_g": 42,
+      "carbs_g": 55,
+      "fat_g": 19,
+      "prep_minutes": 18,
+      "servings": 1,
+      "ingredients": [
+        "180g lean beef strips",
+        "100g rice noodles",
+        "mixed stir-fry vegetables (pepper, broccoli, carrot)",
+        "1 tbsp soy sauce",
+        "1 tsp sesame oil",
+        "garlic and ginger"
+      ],
+      "instructions": [
+        "Cook the noodles according to packet instructions.",
+        "Stir-fry the beef over high heat until browned, then set aside.",
+        "Stir-fry the vegetables with garlic and ginger, then return the beef to the pan.",
+        "Toss through the noodles with soy sauce and sesame oil."
+      ]
     },
     {
       "name": "Lean steak, sweet potato mash, green beans",
       "type": "dinner",
       "calories": 620,
-      "protein_g": 50
+      "protein_g": 50,
+      "carbs_g": 45,
+      "fat_g": 27,
+      "prep_minutes": 22,
+      "servings": 1,
+      "ingredients": [
+        "200g lean steak",
+        "250g sweet potato",
+        "150g green beans",
+        "1 tsp butter",
+        "seasoning of choice"
+      ],
+      "instructions": [
+        "Boil and mash the sweet potato with a little butter.",
+        "Season and pan-sear the steak to your liking.",
+        "Steam the green beans.",
+        "Rest the steak for a few minutes before serving."
+      ]
     },
     {
       "name": "Salmon fillet, quinoa, roasted asparagus",
       "type": "dinner",
       "calories": 600,
-      "protein_g": 45
+      "protein_g": 45,
+      "carbs_g": 42,
+      "fat_g": 28,
+      "prep_minutes": 20,
+      "servings": 1,
+      "ingredients": [
+        "180g salmon fillet",
+        "150g cooked quinoa",
+        "150g asparagus",
+        "1 tsp olive oil",
+        "lemon wedge"
+      ],
+      "instructions": [
+        "Roast the salmon and asparagus with olive oil at 200C for 12-15 minutes.",
+        "Serve over quinoa with a squeeze of lemon."
+      ]
     },
     {
       "name": "Turkey mince chilli with rice",
       "type": "dinner",
       "calories": 580,
-      "protein_g": 48
+      "protein_g": 48,
+      "carbs_g": 55,
+      "fat_g": 19,
+      "prep_minutes": 30,
+      "servings": 1,
+      "ingredients": [
+        "250g lean turkey mince",
+        "1 tin kidney beans",
+        "1 tin chopped tomatoes",
+        "1 onion, diced",
+        "1 pepper, diced",
+        "chilli spices",
+        "150g cooked rice"
+      ],
+      "instructions": [
+        "Brown the turkey mince with onion and pepper.",
+        "Add the chopped tomatoes, kidney beans, and spices.",
+        "Simmer for 20 minutes.",
+        "Serve over rice."
+      ]
+    },
+    {
+      "name": "Baked cod, crushed new potatoes, tenderstem broccoli",
+      "type": "dinner",
+      "calories": 480,
+      "protein_g": 42,
+      "carbs_g": 40,
+      "fat_g": 17,
+      "prep_minutes": 25,
+      "servings": 1,
+      "ingredients": [
+        "200g cod fillet",
+        "250g new potatoes",
+        "150g tenderstem broccoli",
+        "1 tbsp olive oil",
+        "lemon and herbs"
+      ],
+      "instructions": [
+        "Boil the new potatoes until tender, then crush lightly with olive oil.",
+        "Bake the cod at 200C for 15 minutes with lemon and herbs.",
+        "Steam the tenderstem broccoli.",
+        "Serve together."
+      ]
+    },
+    {
+      "name": "Chicken fajita bowl with peppers and black beans",
+      "type": "dinner",
+      "calories": 550,
+      "protein_g": 46,
+      "carbs_g": 50,
+      "fat_g": 18,
+      "prep_minutes": 18,
+      "servings": 1,
+      "ingredients": [
+        "200g chicken breast, sliced",
+        "1 pepper, sliced",
+        "1 onion, sliced",
+        "100g black beans",
+        "150g cooked rice",
+        "fajita seasoning",
+        "lime"
+      ],
+      "instructions": [
+        "Season the chicken with fajita spices and pan-fry with the peppers and onion until cooked through.",
+        "Warm the black beans.",
+        "Serve over rice with a squeeze of lime."
+      ]
     },
     {
       "name": "Protein shake (whey + milk)",
       "type": "snack",
       "calories": 220,
-      "protein_g": 30
+      "protein_g": 30,
+      "carbs_g": 12,
+      "fat_g": 6,
+      "prep_minutes": 2,
+      "servings": 1,
+      "ingredients": ["1 scoop whey protein", "300ml milk", "ice (optional)"],
+      "instructions": ["Shake or blend all ingredients together."]
     },
     {
       "name": "Cottage cheese & pineapple",
       "type": "snack",
       "calories": 200,
-      "protein_g": 22
+      "protein_g": 22,
+      "carbs_g": 20,
+      "fat_g": 4,
+      "prep_minutes": 2,
+      "servings": 1,
+      "ingredients": ["200g cottage cheese", "100g pineapple chunks"],
+      "instructions": ["Combine the cottage cheese and pineapple in a bowl."]
     },
     {
       "name": "Handful of almonds & an apple",
       "type": "snack",
       "calories": 260,
-      "protein_g": 8
+      "protein_g": 8,
+      "carbs_g": 28,
+      "fat_g": 13,
+      "prep_minutes": 1,
+      "servings": 1,
+      "ingredients": ["30g almonds", "1 apple"],
+      "instructions": ["Eat as is."]
     },
     {
       "name": "Rice cakes with peanut butter",
       "type": "snack",
       "calories": 240,
-      "protein_g": 9
+      "protein_g": 9,
+      "carbs_g": 28,
+      "fat_g": 10,
+      "prep_minutes": 2,
+      "servings": 1,
+      "ingredients": ["3 rice cakes", "2 tbsp peanut butter"],
+      "instructions": ["Spread the peanut butter over the rice cakes."]
     }
   ]
 }

@@ -119,23 +119,69 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
         <section className="card" key={type}>
           <h3 className="card-title">{MEAL_TYPE_LABELS[type]}</h3>
           <ul className="suggestion-list">
-            {items.map((meal) => (
-              <li className="suggestion-row" key={meal.name}>
-                <div className="suggestion-info">
-                  <span className="suggestion-name">{meal.name}</span>
-                  <span className="suggestion-macros">
-                    {meal.calories} kcal · {meal.protein_g}g protein
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="btn btn-small btn-primary"
-                  onClick={() => handleAddSuggestion(meal)}
-                >
-                  Add
-                </button>
-              </li>
-            ))}
+            {items.map((meal) => {
+              let ingredientsBlock = null;
+              if (meal.ingredients && meal.ingredients.length > 0) {
+                ingredientsBlock = (
+                  <div>
+                    <h4 className="recipe-subhead">Ingredients</h4>
+                    <ul className="recipe-ingredient-list">
+                      {meal.ingredients.map((ingredient) => (
+                        <li key={ingredient}>{ingredient}</li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              }
+
+              let instructionsBlock = null;
+              if (meal.instructions && meal.instructions.length > 0) {
+                instructionsBlock = (
+                  <div>
+                    <h4 className="recipe-subhead">Method</h4>
+                    <ol className="recipe-instruction-list">
+                      {meal.instructions.map((step) => (
+                        <li key={step}>{step}</li>
+                      ))}
+                    </ol>
+                  </div>
+                );
+              }
+
+              return (
+                <li key={meal.name}>
+                  <details className="recipe-card">
+                    <summary className="suggestion-row">
+                      <div className="suggestion-info">
+                        <span className="suggestion-name">{meal.name}</span>
+                        <span className="suggestion-macros">
+                          {meal.calories} kcal · {meal.protein_g}g protein
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="recipe-panel">
+                      <div className="recipe-macros">
+                        <span>Protein {meal.protein_g}g</span>
+                        <span>Carbs {meal.carbs_g}g</span>
+                        <span>Fat {meal.fat_g}g</span>
+                      </div>
+                      <p className="recipe-meta">
+                        {meal.prep_minutes} min · Serves {meal.servings}
+                      </p>
+                      {ingredientsBlock}
+                      {instructionsBlock}
+                      <button
+                        type="button"
+                        className="btn btn-small btn-primary"
+                        onClick={() => handleAddSuggestion(meal)}
+                      >
+                        Add to Today's Log
+                      </button>
+                    </div>
+                  </details>
+                </li>
+              );
+            })}
           </ul>
         </section>
       );
@@ -299,7 +345,7 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
           className={segment === 'suggestions' ? 'segment segment-active' : 'segment'}
           onClick={() => setSegment('suggestions')}
         >
-          Suggestions
+          Recipes
         </button>
       </div>
       {segmentContent}
