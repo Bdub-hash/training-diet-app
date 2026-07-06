@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toISODate } from '../utils/dates.js';
 import { estimateMealFromPhoto } from '../utils/aiVision.js';
 import { loadApiKey } from '../utils/storage.js';
+import ProgressRing from './ProgressRing.jsx';
 
 const MEAL_TYPE_LABELS = {
   breakfast: 'Breakfast',
@@ -245,17 +246,11 @@ function NutritionView({ config, mealsCatalog, meals, actions }) {
       );
     }
 
-    const calorieProgress = Math.min((totalCalories / config.nutrition.calories) * 100, 100);
-
     segmentContent = [
-      <section className="card" key="progress">
+      <section className="card ring-card" key="progress">
         <h3 className="card-title">Today's Calories</h3>
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${calorieProgress}%` }} />
-        </div>
-        <p className="nutrition-notes">
-          {totalCalories} / {config.nutrition.calories} kcal · {totalProtein}g protein
-        </p>
+        <ProgressRing value={totalCalories} max={config.nutrition.calories} unit="kcal" />
+        <p className="nutrition-notes">{totalProtein}g protein logged today</p>
       </section>,
 
       <section className="card" key="manual">
